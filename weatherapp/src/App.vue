@@ -4,8 +4,7 @@ export default {
   data() {
     return {
       fetchedData: [],
-      startFlg: "",
-      hotFlg: ""
+      startFlg: ""
     }
   },
   methods: {
