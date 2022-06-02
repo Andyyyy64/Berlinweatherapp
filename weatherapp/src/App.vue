@@ -1,7 +1,5 @@
 <script>
-
 import axios from "axios"
-
 export default {
   data() {
     return {
@@ -14,11 +12,9 @@ export default {
     async gettemp() {
       const url = "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&hourly=temperature_2m"
       const response = await axios.get(url)
-
       const tempArr = response.data.hourly.temperature_2m
       const timeArr = response.data.hourly.time
       // let tempTimeArr = []
-
       // for (let i = 0; i < tempArr.length; i++) {
       //   tempTimeArr.push({
       //     temp: tempArr[i],
@@ -31,10 +27,11 @@ export default {
           time: timeArr[index]
         }
       })
-
       this.fetchedData = tempTimeArr
       this.startFlg = true
-
+    },
+    hotFil(){
+      
     }
   }
 }
@@ -48,11 +45,16 @@ export default {
       <button @click="gettemp" class="Btn srttemp">show temperature</button>
     </div>
     <div v-if="startFlg">
+    <button @click="hotFil">Filter only Hot time</button>
+    <div>
+
+    </div>
       <ul v-for="(info, index) in fetchedData" :key="index">
         <li>
           時間:{{ info.time }}温度:{{ info.temp }}{{ info.temp >= 15 ? "熱い" : "寒い" }}
         </li>
       </ul>
+      
     </div>
 
   </div>
