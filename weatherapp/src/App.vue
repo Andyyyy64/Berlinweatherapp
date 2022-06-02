@@ -35,8 +35,8 @@ export default {
       this.hotFlg = true
     },
     hotFil() {
-      const filteredData = this.fetchedData.filter(function (ondo) {
-        return ondo.temp > 15
+      const filteredData = this.fetchedData.filter(function (tempTimeObj) {
+        return tempTimeObj.temp > 15
       });
       alert(JSON.stringify(filteredData))
     }
