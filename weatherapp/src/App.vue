@@ -1,15 +1,13 @@
 <script>
 import TimesDisplayContainerVue from "./TimesDisplayContainer.vue"
 import axios from "axios"
-
 export default {
   components: {
     TimesDisplayContainerVue
   },
   data() {
     return {
-      fetchedData: [
-      ],
+      fetchedData: [],
       startFlg: ""
     }
   },
@@ -17,11 +15,9 @@ export default {
     async gettemp() {
       const url = "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&hourly=temperature_2m"
       const response = await axios.get(url)
-
       const tempArr = response.data.hourly.temperature_2m
       const timeArr = response.data.hourly.time
       // let tempTimeArr = []
-
       // for (let i = 0; i < tempArr.length; i++) {
       //   tempTimeArr.push({
       //     temp: tempArr[i],
@@ -34,13 +30,20 @@ export default {
           time: timeArr[index]
         }
       })
-
       this.fetchedData = tempTimeArr
       this.startFlg = true
-
+      this.hotFlg = true
+    },
+    hotFil() {
+      const filteredData = this.fetchedData.filter(function (tempTimeObj) {
+        return tempTimeObj.temp > 15
+      });
+      alert(JSON.stringify(filteredData))
     }
-  }
+  },
+
 }
+
 </script>
 <template>
   <div class="container">
@@ -51,9 +54,10 @@ export default {
       <button @click="gettemp" class="Btn srttemp">show temperature</button>
     </div>
     <div v-if="startFlg">
-    <TimesDisplayContainerVue
-    :Data="fetchedData">
-    </TimesDisplayContainerVue>
+      <button @click="hotFil">Filter only Hot time</button>
+      <TimesDisplayContainerVue
+        :Data="fetchedData">
+      </TimesDisplayContainerVue>
     </div>
 
   </div>
