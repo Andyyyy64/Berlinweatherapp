@@ -3,9 +3,9 @@ import axios from "axios"
 export default {
   data() {
     return {
-      fetchedData: [
-      ],
-      startFlg: ""
+      fetchedData: [],
+      startFlg: "",
+      hotFlg: ""
     }
   },
   methods: {
@@ -22,19 +22,25 @@ export default {
       //   })
       // }
       const tempTimeArr = tempArr.map((_, index) => {
-        return { 
+        return {
           temp: tempArr[index],
           time: timeArr[index]
         }
       })
       this.fetchedData = tempTimeArr
       this.startFlg = true
+      this.hotFlg = true
     },
-    hotFil(){
-      
+    hotFil() {
+      const filteredData = this.fetchedData.filter(function (ondo) {
+        return ondo.temp > 15;
+      });
+      console.log(filteredData)
     }
-  }
+  },
+
 }
+
 </script>
 <template>
   <div class="container">
@@ -45,16 +51,13 @@ export default {
       <button @click="gettemp" class="Btn srttemp">show temperature</button>
     </div>
     <div v-if="startFlg">
-    <button @click="hotFil">Filter only Hot time</button>
-    <div>
-
-    </div>
+      <button @click="hotFil">Filter only Hot time</button>
       <ul v-for="(info, index) in fetchedData" :key="index">
         <li>
           時間:{{ info.time }}温度:{{ info.temp }}{{ info.temp >= 15 ? "熱い" : "寒い" }}
         </li>
       </ul>
-      
+
     </div>
 
   </div>
