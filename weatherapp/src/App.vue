@@ -1,8 +1,11 @@
 <script>
-
+import TimesDisplayContainerVue from "./TimesDisplayContainer.vue"
 import axios from "axios"
 
 export default {
+  components: {
+    TimesDisplayContainerVue
+  },
   data() {
     return {
       fetchedData: [
@@ -26,7 +29,7 @@ export default {
       //   })
       // }
       const tempTimeArr = tempArr.map((_, index) => {
-        return { 
+        return {
           temp: tempArr[index],
           time: timeArr[index]
         }
@@ -48,11 +51,9 @@ export default {
       <button @click="gettemp" class="Btn srttemp">show temperature</button>
     </div>
     <div v-if="startFlg">
-      <ul v-for="(info, index) in fetchedData" :key="index">
-        <li>
-          時間:{{ info.time }}温度:{{ info.temp }}{{ info.temp >= 15 ? "熱い" : "寒い" }}
-        </li>
-      </ul>
+    <TimesDisplayContainerVue
+    :Data="fetchedData">
+    </TimesDisplayContainerVue>
     </div>
 
   </div>
