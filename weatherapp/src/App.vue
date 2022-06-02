@@ -33,9 +33,9 @@ export default {
     },
     hotFil() {
       const filteredData = this.fetchedData.filter(function (ondo) {
-        return ondo.temp > 15;
+        return ondo.temp > 15
       });
-      console.log(filteredData)
+      alert(JSON.stringify(filteredData))
     }
   },
 
