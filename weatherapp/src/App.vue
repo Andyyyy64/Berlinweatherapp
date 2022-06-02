@@ -1,6 +1,10 @@
 <script>
+import TimesDisplayContainerVue from "./TimesDisplayContainer.vue"
 import axios from "axios"
 export default {
+  components: {
+    TimesDisplayContainerVue
+  },
   data() {
     return {
       fetchedData: [],
@@ -51,12 +55,9 @@ export default {
     </div>
     <div v-if="startFlg">
       <button @click="hotFil">Filter only Hot time</button>
-      <ul v-for="(info, index) in fetchedData" :key="index">
-        <li>
-          時間:{{ info.time }}温度:{{ info.temp }}{{ info.temp >= 15 ? "熱い" : "寒い" }}
-        </li>
-      </ul>
-
+      <TimesDisplayContainerVue
+        :Data="fetchedData">
+      </TimesDisplayContainerVue>
     </div>
 
   </div>
