@@ -49,16 +49,45 @@ export default {
   <div class="container">
     <div v-if="!startFlg">
       <div class="title">
-        <h1>I know u want the temperature...press this</h1>
+        <h1 class="Btntitle">I know u want the temperature...press this</h1>
       </div>
       <button @click="gettemp" class="Btn srttemp">show temperature</button>
     </div>
     <div v-if="startFlg">
-      <button @click="hotFil">Filter only Hot time</button>
-      <TimesDisplayContainerVue
-        :Data="fetchedData">
+      <button @click="hotFil" class="Btn srtHot">Filter only Hot time</button>
+      <TimesDisplayContainerVue :Data="fetchedData">
       </TimesDisplayContainerVue>
     </div>
 
   </div>
 </template>
+<style>
+* {
+  text-align: center;
+}
+
+li {
+  list-style: none;
+}
+
+.Btn {
+  box-shadow: 0px 2px rgb(109, 108, 108);
+  cursor: pointer;
+}
+
+.Btn:active {
+  position: relative;
+  top: 2px;
+  box-shadow: none;
+}
+
+ul {
+  filter: drop-shadow(1px 2px 1px lightgreen);
+}
+.Btntitle{
+  color: fuchsia;
+}
+
+
+
+</style>
